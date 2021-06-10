@@ -9,7 +9,7 @@ describe('dog routes', () => {
     return setup(pool);
   });
 
-  it.only('creates a dog via POST', async () => {
+  it('creates a dog via POST', async () => {
     const res = await request(app)
       .post('/api/v1/dogs')
       .send({ name: 'poochy', age: 24, weight: '140 lbs' });
@@ -34,3 +34,18 @@ describe('dog routes', () => {
     expect(res.body).toEqual(dog);
   });
 });
+
+it('updates a dog by id via PUT', async () => {
+  const dog = await Dog.insert({
+    name: 'Bandit',
+    age: 10,
+    weight: '60 lbs'
+  });
+
+  dog.weight = '25 lbs';
+
+  const res = await request(app).put(`/api/v1/dogs/${dog.id}`)
+    .send(dog);
+  expect(res.body).toEqual(dog);
+});
+
