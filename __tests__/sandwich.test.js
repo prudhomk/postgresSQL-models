@@ -57,4 +57,18 @@ describe('sandwich routes', () => {
 
     expect(res.body).toEqual(sandwich);
   });
+
+  it('updates a sandwich by id via PUT', async () => {
+    const sandwich = await Sandwich.insert({
+      name: 'Croque-monsieur',
+      ingredients: 'brioche, ham, gruyere cheese, bechamel sauce, fried egg',
+      rating: '5 Stars'
+    });
+
+    sandwich.name = 'Croque-madame';
+
+    const res = await request(app).put(`/api/v1/sandwiches/${sandwich.id}`)
+      .send(sandwich);
+    expect(res.body).toEqual(sandwich);
+  });
 });
