@@ -49,3 +49,15 @@ it('updates a dog by id via PUT', async () => {
   expect(res.body).toEqual(dog);
 });
 
+it('deletes a dog by id via DELETE', async () => {
+  const dog = await Dog.insert({
+    name: 'Mittens',
+    age: 9,
+    weight: '3 lbs'
+  });
+
+  const res = await request(app).delete(`/api/v1/dogs/${dog.id}`)
+    .send(dog);
+  expect(res.body).toEqual(dog);
+});
+
