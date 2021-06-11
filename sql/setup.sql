@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS dogs, heroes, games;
+DROP TABLE IF EXISTS dogs, heroes, games, albums;
 
 CREATE TABLE dogs (
   id BIGINT GENERATED ALWAYS AS IDENTITY,
@@ -21,3 +21,10 @@ CREATE TABLE games (
   price REAL NOT NULL,
   console TEXT
 );
+
+CREATE TABLE albums (
+  id BIGINT GENERATED ALWAYS AS IDENTITY,
+  title TEXT NOT NULL,
+  year INTEGER NOT NULL,
+  genre TEXT
+)
