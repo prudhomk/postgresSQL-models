@@ -71,4 +71,16 @@ describe('album routes', () => {
       .send(album);
     expect(res.body).toEqual(album);
   });
+
+  it('deletes an album by id via DELETE', async () => {
+    const album = await Album.insert({
+      title: 'Sgt. Puppers Lonely Barks Pup Band',
+      year: 1967,
+      genre: 'dog'
+    });
+
+    const res = await request(app).delete(`/api/v1/albums/${album.id}`)
+      .send(album);
+    expect(res.body).toEqual(album);
+  });
 });
