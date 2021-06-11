@@ -1,4 +1,4 @@
-import pool from '../lib/utils/pools.js';
+import pool from '../lib/utils/pool.js';
 import setup from '../data/setup.js';
 import request from 'supertest';
 import app from '../lib/app.js';
@@ -20,5 +20,29 @@ describe('album routes', () => {
       year: 2015,
       genre: 'funk'
     });
+  });
+
+  it('finds all albums via GET', async () => {
+
+    const vulfpeck = await Album.insert({
+      title: 'Thrill of The Arts',
+      year: 2015,
+      genre: 'funk'
+    });
+
+    const sparks = await Album.insert({
+      title: 'Kimono my House',
+      year: 1974,
+      genre: 'pop'
+    });
+
+    const beatles = await Album.insert({
+      title: 'Revolver',
+      year: 1966,
+      genre: 'rock'
+    });
+
+    const res = await request(app).get('/api/v1/albums');
+    expect(res.body).toEqual([vulfpeck, sparks, beatles]);
   });
 });
