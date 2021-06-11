@@ -77,4 +77,17 @@ describe('game routes', () => {
       .send(game);
     expect(res.body).toEqual(game);
   });
+
+  it('deletes a game by id via DELETE', async () => {
+    const game = await Game.insert({
+      title: 'E.T. The Extra Terrestrial',
+      rating: 'E',
+      price: 59.99,
+      console: 'Atari 2600'
+    }); 
+
+    const res = await request(app).delete(`/api/v1/games/${game.id}`)
+      .send(game);
+    expect(res.body).toEqual(game);
+  });
 });

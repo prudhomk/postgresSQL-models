@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS dogs, heroes, games;
+
 CREATE TABLE dogs (
   id BIGINT GENERATED ALWAYS AS IDENTITY,
   name TEXT NOT NULL,
