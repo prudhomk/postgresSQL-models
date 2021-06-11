@@ -49,4 +49,17 @@ describe('game routes', () => {
     const res = await request(app).get('/api/v1/games');
     expect(res.body).toEqual([mario, zelda, huntdown]);
   });
+
+  it('finds a game by id via GET', async () => {
+    const game = await Game.insert({
+      title: 'Huntdown',
+      rating: 'T',
+      price: 19.99,
+      console: 'All'
+    });
+
+    const res = await request(app).get(`/api/v1/games/${game.id}`);
+
+    expect(res.body).toEqual(game);
+  });
 });
