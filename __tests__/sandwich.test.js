@@ -71,4 +71,16 @@ describe('sandwich routes', () => {
       .send(sandwich);
     expect(res.body).toEqual(sandwich);
   });
+
+  it('deletes a sandwich by id via DELETE', async () => {
+    const sandwich = await Sandwich.insert({
+      name: 'Bologna',
+      ingredients: 'bologna, cheese',
+      rating: '1 Star'
+    });
+
+    const res = await request(app).delete(`/api/v1/sandwiches/${sandwich.id}`)
+      .send(sandwich);
+    expect(res.body).toEqual(sandwich);
+  });
 });
