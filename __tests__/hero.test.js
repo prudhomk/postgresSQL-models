@@ -72,5 +72,16 @@ describe('hero routes', () => {
     expect(res.body).toEqual(hero);
   });
 
+  it('deletes a hero by id via DELETE', async () => {
+    const hero = await Hero.insert({
+      name: 'General Zod',
+      species: 'Kryptonian',
+      ability: 'Strength, flight, heat-vision, speed'
+    });
+
+    const res = await request(app).delete(`/api/v1/heroes/${hero.id}`)
+      .send(hero);
+    expect(res.body).toEqual(hero);
+  });
 
 });
