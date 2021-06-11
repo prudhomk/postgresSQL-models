@@ -1,13 +1,22 @@
-DROP TABLE IF EXISTS dogs, heroes;
+DROP TABLE IF EXISTS dogs, heroes, games;
 CREATE TABLE dogs (
   id BIGINT GENERATED ALWAYS AS IDENTITY,
   name TEXT NOT NULL,
   age INTEGER NOT NULL,
   weight TEXT
 );
+
 CREATE TABLE heroes (
   id BIGINT GENERATED ALWAYS AS IDENTITY,
   name TEXT NOT NULL,
   species TEXT,
   ability TEXT
+);
+
+CREATE TABLE games (
+  id BIGINT GENERATED ALWAYS AS IDENTITY,
+  title TEXT NOT NULL,
+  rating TEXT NOT NULL,
+  price REAL NOT NULL,
+  console TEXT
 );
