@@ -58,5 +58,19 @@ describe('hero routes', () => {
     expect(res.body).toEqual(hero);
   });
 
+  it('updates a hero by id via PUT', async () => {
+    const hero = await Hero.insert({
+      name: 'Rocket Raccoon',
+      species: 'trash panda',
+      ability: 'weapons expert'
+    });
+
+    hero.species = 'raccoon';
+
+    const res = await request(app).put(`/api/v1/heroes/${hero.id}`)
+      .send(hero);
+    expect(res.body).toEqual(hero);
+  });
+
 
 });
