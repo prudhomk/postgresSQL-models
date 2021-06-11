@@ -62,4 +62,19 @@ describe('game routes', () => {
 
     expect(res.body).toEqual(game);
   });
+
+  it('updates a game by id via PUT', async () => {
+    const game = await Game.insert({
+      title: 'Metal Slug',
+      rating: 'T',
+      price: 19.99,
+      console: 'All'
+    });
+
+    game.title = 'Metal Slug Anthology';
+
+    const res = await request(app).put(`/api/v1/games/${game.id}`)
+      .send(game);
+    expect(res.body).toEqual(game);
+  });
 });
