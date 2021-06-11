@@ -21,4 +21,28 @@ describe('sandwich routes', () => {
       rating: '5 Stars'
     });
   });
+
+  it('finds all sanwiches via GET', async () => {
+    
+    const BLT = await Sandwich.insert({
+      name: 'BLT',
+      ingredients: 'bacon, lettuce, tomato, mayo',
+      rating: '5 Stars'
+    });
+    
+    const gyro = await Sandwich.insert({
+      name: 'Gyro',
+      ingredients: 'lamb, lettuce, tomato, tsatziki, pickles, onion',
+      rating: '5 Stars'
+    });
+
+    const cheese = await Sandwich.insert({
+      name: 'Grilled Cheese',
+      ingredients: 'cheese',
+      rating: '5 Stars'
+    });
+
+    const res = await request(app).get('/api/v1/sandwiches');
+    expect(res.body).toEqual([BLT, gyro, cheese]);
+  });
 });
