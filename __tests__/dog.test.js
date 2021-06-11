@@ -4,6 +4,7 @@ import request from 'supertest';
 import app from '../lib/app.js';
 import Dog from '../lib/models/Dog.js';
 
+
 describe('dog routes', () => {
   beforeEach(() => {
     return setup(pool);
@@ -23,7 +24,7 @@ describe('dog routes', () => {
   });
 
   it('finds all dogs via GET', async () => {
-    
+
     const poochy = await Dog.insert({
       name: 'poochy',
       age: 24,
@@ -85,3 +86,5 @@ describe('dog routes', () => {
     expect(res.body).toEqual(dog);
   });
 });
+
+
