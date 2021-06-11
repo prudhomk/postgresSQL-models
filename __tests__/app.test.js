@@ -22,6 +22,30 @@ describe('dog routes', () => {
     });
   });
 
+  it('finds all dogs via GET', async () => {
+    
+    const poochy = await Dog.insert({
+      name: 'poochy',
+      age: 24,
+      weight: '140 lbs'
+    });
+
+    const fido = await Dog.insert({
+      name: 'fido',
+      age: 10,
+      weight: '20 lbs'
+    });
+
+    const lassie = await Dog.insert({
+      name: 'lassie',
+      age: 6,
+      weight: '18 lbs'
+    });
+
+    const res = await request(app).get('/api/v1/dogs');
+    expect(res.body).toEqual([poochy, fido, lassie]);
+  });
+
   it('finds a dog by id via GET', async () => {
     const dog = await Dog.insert({
       name: 'fido',
@@ -33,31 +57,31 @@ describe('dog routes', () => {
 
     expect(res.body).toEqual(dog);
   });
-});
 
-it('updates a dog by id via PUT', async () => {
-  const dog = await Dog.insert({
-    name: 'Bandit',
-    age: 10,
-    weight: '60 lbs'
+
+  it('updates a dog by id via PUT', async () => {
+    const dog = await Dog.insert({
+      name: 'Bandit',
+      age: 10,
+      weight: '60 lbs'
+    });
+
+    dog.weight = '25 lbs';
+
+    const res = await request(app).put(`/api/v1/dogs/${dog.id}`)
+      .send(dog);
+    expect(res.body).toEqual(dog);
   });
 
-  dog.weight = '25 lbs';
+  it('deletes a dog by id via DELETE', async () => {
+    const dog = await Dog.insert({
+      name: 'Mittens',
+      age: 9,
+      weight: '3 lbs'
+    });
 
-  const res = await request(app).put(`/api/v1/dogs/${dog.id}`)
-    .send(dog);
-  expect(res.body).toEqual(dog);
-});
-
-it('deletes a dog by id via DELETE', async () => {
-  const dog = await Dog.insert({
-    name: 'Mittens',
-    age: 9,
-    weight: '3 lbs'
+    const res = await request(app).delete(`/api/v1/dogs/${dog.id}`)
+      .send(dog);
+    expect(res.body).toEqual(dog);
   });
-
-  const res = await request(app).delete(`/api/v1/dogs/${dog.id}`)
-    .send(dog);
-  expect(res.body).toEqual(dog);
 });
-
