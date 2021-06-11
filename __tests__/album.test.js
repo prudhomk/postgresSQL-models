@@ -57,4 +57,18 @@ describe('album routes', () => {
 
     expect(res.body).toEqual(album);
   });
+
+  it('updates an album by id via PUT', async () => {
+    const album = await Album.insert({
+      title: 'Eldorado',
+      year: 1974,
+      genre: 'hip-hop'
+    });
+
+    album.genre = 'rock';
+
+    const res = await request(app).put(`/api/v1/albums/${album.id}`)
+      .send(album);
+    expect(res.body).toEqual(album);
+  });
 });
