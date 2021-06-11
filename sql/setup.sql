@@ -1,0 +1,37 @@
+DROP TABLE IF EXISTS dogs, heroes, games, albums, sandwiches;
+
+CREATE TABLE dogs (
+  id BIGINT GENERATED ALWAYS AS IDENTITY,
+  name TEXT NOT NULL,
+  age INTEGER NOT NULL,
+  weight TEXT
+);
+
+CREATE TABLE heroes (
+  id BIGINT GENERATED ALWAYS AS IDENTITY,
+  name TEXT NOT NULL,
+  species TEXT,
+  ability TEXT
+);
+
+CREATE TABLE games (
+  id BIGINT GENERATED ALWAYS AS IDENTITY,
+  title TEXT NOT NULL,
+  rating TEXT NOT NULL,
+  price REAL NOT NULL,
+  console TEXT
+);
+
+CREATE TABLE albums (
+  id BIGINT GENERATED ALWAYS AS IDENTITY,
+  title TEXT NOT NULL,
+  year INTEGER NOT NULL,
+  genre TEXT
+);
+
+CREATE TABLE sandwiches (
+  id BIGINT GENERATED ALWAYS AS IDENTITY,
+  name TEXT NOT NULL,
+  ingredients TEXT NOT NULL,
+  rating TEXT
+)
