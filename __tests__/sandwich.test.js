@@ -45,4 +45,16 @@ describe('sandwich routes', () => {
     const res = await request(app).get('/api/v1/sandwiches');
     expect(res.body).toEqual([BLT, gyro, cheese]);
   });
+
+  it('finds a sandwich by id via GET', async () => {
+    const sandwich = await Sandwich.insert({
+      name: 'Muffuletta',
+      ingredients: 'olive salad, salami, ham, swiss cheese, provolone, mortadella',
+      rating: '5 Stars'
+    });
+
+    const res = await request(app).get(`/api/v1/sandwiches/${sandwich.id}`);
+
+    expect(res.body).toEqual(sandwich);
+  });
 });
