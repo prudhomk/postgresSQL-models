@@ -46,5 +46,17 @@ describe('hero routes', () => {
     expect(res.body).toEqual([saitama, flash, anpanman]);
   });
 
+  it('finds a hero by id via GET', async () => {
+    const hero = await Hero.insert({
+      name: 'Matter-Eater Lad',
+      species: 'human',
+      ability: 'eats everything'
+    });
+
+    const res = await request(app).get(`/api/v1/heroes/${hero.id}`);
+
+    expect(res.body).toEqual(hero);
+  });
+
 
 });
