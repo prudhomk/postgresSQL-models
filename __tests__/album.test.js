@@ -45,4 +45,16 @@ describe('album routes', () => {
     const res = await request(app).get('/api/v1/albums');
     expect(res.body).toEqual([vulfpeck, sparks, beatles]);
   });
+
+  it('finds an album by id via GET', async () => {
+    const album = await Album.insert({
+      title: 'Kimono my House',
+      year: 1974,
+      genre: 'pop'
+    });
+
+    const res = await request(app).get(`/api/v1/albums/${album.id}`);
+
+    expect(res.body).toEqual(album);
+  });
 });
